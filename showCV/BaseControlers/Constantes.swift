@@ -28,4 +28,15 @@ struct Informacion
     static let mailPersonalJat:String     = "isw.jatziry.barrerah@gmail.com"
     static let mailAcademicos:String      = ""
     static let mailAcademicosJat:String   = "http://web.uaemex.mx/UAPTianguistenco/"
+    
+}
+
+struct constantesAux
+{
+    static let numeros:String   = "0123456789"
+    static let letras:String    = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ "
+    static let tamTelefono:Int  = 10
+    static let tamNomApe:Int    = 41
+    static let correo:String    = "abcdefghijklmnñopqrstuvwxyz.@0123456789"
+    
 }

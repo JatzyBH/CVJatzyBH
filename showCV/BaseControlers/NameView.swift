@@ -26,7 +26,11 @@ enum NameView: Int
     /// Para mostrar la vista ...   de la app.
     case conocimTec                             = 6
     /// Para mostrar la vista ...  de la app.
-    case otra3                                  = 8
+    case ingresaDatos                           = 8
+    /// Para mostrar la vista ...  de la app.
+    case guardoDatos                            = 9
+    /// Para mostrar la vista ...  de la app.
+    case muestrainf                             = 10
     
     func toString() -> String
     {
@@ -54,8 +58,14 @@ enum NameView: Int
             case .experL:
                 nombre = "Experiencia Laboral"
                 break
-            case .otra3:
-                nombre = "otra3"
+            case .ingresaDatos:
+                nombre = "Ingresa información"
+                break
+            case .guardoDatos:
+                nombre = "Guardo Datos ingresados"
+                break
+            case .muestrainf:
+                nombre = "Muestra todos los datos"
                 break
         }
         return nombre
@@ -87,6 +97,15 @@ enum NameView: Int
             case .conocimTec:
                 nombre = "ConocimientosViewController"
                 break
+            case .ingresaDatos:
+                nombre = "IngresaDatosViewController"
+                break
+            case .guardoDatos:
+                nombre = "GuardoDatosViewController"
+                break
+            case .muestrainf:
+                nombre = "MuestraDatosArchivoViewController"
+                break
             default:
                 break
         }
@@ -104,8 +123,8 @@ enum NameView: Int
             case .menuNavigator:
                 name = "DrawerMenuStoryboard"
                 break
-            case .otra3:
-                name = "OtroStoryboard"
+            case .ingresaDatos, .guardoDatos, .muestrainf:
+                name = "formularioStoryboard"
                 break
         }
         return name

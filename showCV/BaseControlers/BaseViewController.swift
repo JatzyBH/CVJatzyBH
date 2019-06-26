@@ -340,6 +340,9 @@ extension String
     
     static var Empty: String
     {   return self.sharedInstance  }
+    
+    func removeExtraSpaces() -> String
+    {   return self.replacingOccurrences(of: " ", with: "", options: .regularExpression, range: nil)    }
 }
 
 extension UIColor
@@ -430,5 +433,58 @@ extension UINavigationBar
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: 90)
     }
+}
+
+extension IngresaDatosViewController
+{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if(range.length + range.location > (textField.text ?? String.Empty).count)
+        {   return false    }
+        
+        let set =  CharacterSet(charactersIn: textField == self.telTF ? constantesAux.numeros : constantesAux.letras)
+        let inverted = set.inverted
+        let filtered = string.components(separatedBy: inverted).joined(separator: "")
+        let newLength = (textField.text ?? String.Empty).count + string.count - range.length
+        
+        return  filtered == string && !(newLength > (textField == self.telTF ? constantesAux.tamTelefono : constantesAux.tamNomApe))
+    }
+    
+    func isValidEmail(testStr:String) -> Bool
+    {
+        let emailRegEx = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{1,4}$"
+        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    func validaDatos (_ nombre: String, apellidoPat: String, apellidoMat: String, telefono: String, email: String) -> (esError: Bool, mensaje: String)
+    {
+        var esError = false
+        var mensaje = ""
+        
+        if nombre.removeExtraSpaces().isEmpty
+        {
+            mensaje = "Debes proporcionar un nombre válido"
+            esError = true
+        } else if apellidoPat.removeExtraSpaces().isEmpty
+        {
+            mensaje = "Debes proporcionar un apellido paterno válido"
+            esError = true
+        } else if apellidoMat.removeExtraSpaces().isEmpty
+        {
+            mensaje = "Debes proporcionar un apellido materno válido"
+            esError = true
+        } else if telefono.isEmpty || telefono.count != constantesAux.tamTelefono
+        {
+            mensaje = "Debes proporcionar un teléfono válido"
+            esError = true
+        } else if email.isEmpty || !isValidEmail(testStr: email)
+        {
+            mensaje = "Debes proporcionar un email válido"
+            esError = true
+        }
+        return (esError, mensaje)
+    }
+    
 }
 
