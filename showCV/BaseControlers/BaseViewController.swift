@@ -486,5 +486,42 @@ extension IngresaDatosViewController
         return (esError, mensaje)
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillDisappearr),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        
+    }
+    
+    
+    @objc func keyboardWillShow(_ notification: Notification)
+    {
+        guard let keyboardFrame : NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        if self.webLblTF.isEditing
+        {
+            self.abajoView.constant = keyboardFrame.cgRectValue.height/2 - 25
+        } else if self.telTF.isEditing
+        {
+            self.abajoView.constant = keyboardFrame.cgRectValue.height/2
+        } else
+        {
+            self.abajoView.constant = 25
+        }
+    }
+
+    @objc func keyboardWillDisappearr(_ notification: Notification)
+    { self.abajoView.constant = 25.0 }
+    
 }
 

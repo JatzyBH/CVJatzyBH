@@ -221,6 +221,7 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="abajoView" destination="1yc-Cq-mUs" id="Pav-LJ-VfO"/>
                         <outlet property="anchoView" destination="m9c-vF-VBq" id="cyF-yw-M2Z"/>
                         <outlet property="apMatTF" destination="4O2-LC-9aS" id="JlH-iV-Epu"/>
                         <outlet property="apPatTF" destination="ph4-ML-iG6" id="iwN-BW-MOD"/>

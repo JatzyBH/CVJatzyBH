@@ -19,6 +19,7 @@ class IngresaDatosViewController: BaseViewController, UITextFieldDelegate
     @IBOutlet weak var webLblTF: UITextField!
     @IBOutlet weak var btnGuardar: UIButton!
     @IBOutlet weak var anchoView: NSLayoutConstraint!
+    @IBOutlet weak var abajoView: NSLayoutConstraint!
     
     var datosIngresados = [DatosIngresados]()
     
@@ -34,6 +35,19 @@ class IngresaDatosViewController: BaseViewController, UITextFieldDelegate
         self.apMatTF.delegate = self
         self.apPatTF.delegate = self
         self.telTF.delegate = self
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.numberOfTapsRequired = 1
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyboard()
+    {
+        self.nomTF.resignFirstResponder()
+        self.apMatTF.resignFirstResponder()
+        self.apPatTF.resignFirstResponder()
+        self.telTF.resignFirstResponder()
+        self.webLblTF.resignFirstResponder()
     }
     
     @IBAction func backBtn(_ sender: Any)
